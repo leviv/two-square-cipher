@@ -1,18 +1,20 @@
-var topSquareDecrypt = new Array(5);
-var bottomSquareDecrypt = new Array(5);
-var topSquareEncrypt = new Array(5);
-var bottomSquareEncrypt = new Array(5);
+var squareSize = 5; // width and height of the square matrices we are dealing with
 
-// Add handlers for encrypt and decrypt buttons
+// Define the matrices used for encryption/decryption
+var topSquareDecrypt = new Array(squareSize);
+var bottomSquareDecrypt = new Array(squareSize);
+var topSquareEncrypt = new Array(squareSize);
+var bottomSquareEncrypt = new Array(squareSize);
+
+/*
+ * Add handlers for encrypt and decrypt buttons
+ * Run only when page has loaded
+ */
 $(document).ready(function(){
-  // find elements
-  var button = $("button")
 
   // handle click for decrypt button
   $(".decrypt-form button").on("click", function(){
     decryptPrep();
-
-
   });
 
   // handle click for encrypt button
@@ -20,18 +22,16 @@ $(document).ready(function(){
     console.log("hello");
     encryptPrep();
   });
-
 });
 
 /*
  * Function to fetch and parse data for decyption
- *
  */
 function decryptPrep(){
   // Initialize the 2d array
-  for(var i = 0; i < 5; i++){
-    topSquareDecrypt[i] = new Array(5);
-    bottomSquareDecrypt[i] = new Array(5);
+  for(var i = 0; i < squareSize; i++){
+    topSquareDecrypt[i] = new Array(squareSize);
+    bottomSquareDecrypt[i] = new Array(squareSize);
   }
 
   // Grab the user entered values
@@ -49,13 +49,12 @@ function decryptPrep(){
 
 /*
  * Function to fetch and parse data for encryption
- *
  */
 function encryptPrep(){
   // Initialize the 2d array
-  for(var i = 0; i < 5; i++){
-    topSquareEncrypt[i] = new Array(5);
-    bottomSquareEncrypt[i] = new Array(5);
+  for(var i = 0; i < squareSize; i++){
+    topSquareEncrypt[i] = new Array(squareSize);
+    bottomSquareEncrypt[i] = new Array(squareSize);
   }
 
   // Grab the user entered values
@@ -73,9 +72,9 @@ function encryptPrep(){
 
 /*
  * Function to encrypt the data
- *
  */
 function encrypt(key1, key2, text){
+  // Alter the correct grid
   var topSquare = $("#encrypt-container .top-grid")
   var bottomSquare = $("#encrypt-container .bottom-grid")
 
@@ -84,6 +83,7 @@ function encrypt(key1, key2, text){
 
   var encryptedText = solveSquares(topSquareEncrypt, bottomSquareEncrypt, text);
 
+  // Display and return the result
   $('#encrypt-result span').html(encryptedText);
   return encryptedText;
 }
@@ -91,9 +91,9 @@ function encrypt(key1, key2, text){
 
 /*
  * Function to decrypt the data
- *
  */
 function decrypt(key1, key2, text){
+  // Alter the correct grid
   var topSquare = $("#decrypt-container .top-grid")
   var bottomSquare = $("#decrypt-container .bottom-grid")
 
@@ -102,13 +102,13 @@ function decrypt(key1, key2, text){
 
   var decryptedText = solveSquares(topSquareDecrypt, bottomSquareDecrypt, text);
 
+  // Display and return the result
   $('#decrypt-result span').html(decryptedText);
   return decryptedText;
 }
 
 /*
- * Function to solve the decrypted text, given the two squares
- *
+ * Function to encrypt/decrypt text, given the two squares
  */
 function solveSquares(topSquare, bottomSquare, text){
   var resultText = "";
@@ -138,8 +138,8 @@ function solveSquares(topSquare, bottomSquare, text){
  * return in the form [row,col], return [-1,-1] if not found
  */
 function findLetter(matrix, letter){
-  for(var r = 0; r < 5; r++){
-    for(var c = 0; c < 5; c++){
+  for(var r = 0; r < squareSize; r++){
+    for(var c = 0; c < squareSize; c++){
       if(matrix[r][c] == letter){
         return [r,c];
       }
@@ -150,7 +150,6 @@ function findLetter(matrix, letter){
 
 /*
  * Function to build a key based on cipher requirements
- *
  */
 function buildKey(key, square, matrix){
   var finalKey = "";
@@ -195,7 +194,7 @@ function buildCharArray(key, square, matrix){
     $(this).html(curLetter);
 
     //build the array
-    matrix[Math.floor(counter / 5)][counter % 5] = curLetter;
+    matrix[Math.floor(counter / squareSize)][counter % squareSize] = curLetter;
     counter++
   });
 }
