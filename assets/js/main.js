@@ -29,6 +29,11 @@ function decryptPrep(){
   var key2 = parse($("input#decrypt-keyword2").val());
   var text = parse($("input#decrypt-text").val());
 
+  // If the text entered is an odd number
+  if (text.length % 2 == 1){
+    text += 'z';
+  }
+
   decrypt(key1, key2, text);
 }
 
@@ -42,6 +47,53 @@ function decrypt(key1, key2, text){
 
   key1 = buildKey(key1, topSquare, topSquareDecrypt);
   key2 = buildKey(key2, bottomSquare, bottomSquareDecrypt);
+
+  var decryptedText = solveSquares(topSquareDecrypt, bottomSquareDecrypt, text);
+
+  $('#decrypt-result span').html(decryptedText);
+  return decryptedText;
+}
+
+/*
+ * Function to solve the decrypted text, given the two squares
+ *
+ */
+function solveSquares(topSquare, bottomSquare, text){
+  var resultText = "";
+
+  // Loop through the given text
+  for(var i = 0; i < text.length; i+=2){
+
+    // Retrive and find the position of the next 2 characters
+    var curLetter = text.charAt(i);
+    var nextLetter = text.charAt(i+1);
+
+    var firstLetterPos = findLetter(topSquare, curLetter);
+    var secondLetterPos = findLetter(bottomSquare, nextLetter);
+
+    // Find the letters that the text maps to
+    var firstLetterMap = topSquare[firstLetterPos[0]][secondLetterPos[1]];
+    var secondLetterMap = bottomSquare[secondLetterPos[0]][firstLetterPos[1]];
+
+    resultText = resultText + firstLetterMap + secondLetterMap;
+  }
+
+  return resultText;
+}
+
+/*
+ * Function to find the position of a letter in the matrix
+ * return in the form [row,col], return [-1,-1] if not found
+ */
+function findLetter(matrix, letter){
+  for(var r = 0; r < 5; r++){
+    for(var c = 0; c < 5; c++){
+      if(matrix[r][c] == letter){
+        return [r,c];
+      }
+    }
+  }
+  return [-1,-1];
 }
 
 /*
