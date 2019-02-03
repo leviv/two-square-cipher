@@ -1,5 +1,5 @@
-var topSquareDecrypt = [[],[]];
-var bottomSquareDecrypt = [[],[]];
+var topSquareDecrypt = new Array(5);
+var bottomSquareDecrypt = new Array(5);
 
 // Decrypt code
 $(document).ready(function(){
@@ -18,6 +18,13 @@ $(document).ready(function(){
  *
  */
 function decryptPrep(){
+  // Initialize the 2d array
+  for(var i = 0; i < 5; i++){
+    topSquareDecrypt[i] = new Array(5);
+    bottomSquareDecrypt[i] = new Array(5);
+  }
+
+  // Grab the user entered values
   var key1 = parse($("input#decrypt-keyword1").val());
   var key2 = parse($("input#decrypt-keyword2").val());
   var text = parse($("input#decrypt-text").val());
@@ -35,8 +42,6 @@ function decrypt(key1, key2, text){
 
   key1 = buildKey(key1, topSquare, topSquareDecrypt);
   key2 = buildKey(key2, bottomSquare, bottomSquareDecrypt);
-
-  console.log(topSquareDecrypt);
 }
 
 /*
@@ -77,7 +82,6 @@ function buildKey(key, square, matrix){
  *
  */
 function buildCharArray(key, square, matrix){
-  console.log(key);
   var counter = 0;
 
   // Loop through all 25 html elements
@@ -87,7 +91,7 @@ function buildCharArray(key, square, matrix){
     $(this).html(curLetter);
 
     //build the array
-    matrix[Math.floor(counter / 5)][counter % 5];
+    matrix[Math.floor(counter / 5)][counter % 5] = curLetter;
     counter++
   });
 }
