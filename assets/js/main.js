@@ -19,7 +19,6 @@ $(document).ready(function(){
 
   // handle click for encrypt button
   $(".encrypt-form button").on("click", function(){
-    console.log("hello");
     encryptPrep();
   });
 });
@@ -61,6 +60,8 @@ function encryptPrep(){
   var key1 = parse($("input#encrypt-keyword1").val());
   var key2 = parse($("input#encrypt-keyword2").val());
   var text = parse($("input#encrypt-text").val());
+
+  console.log(text);
 
   // If the text entered is an odd number
   if (text.length % 2 == 1){
@@ -203,7 +204,8 @@ function buildCharArray(key, square, matrix){
  * Parse a single string
  * Remove all non-alpha characters and remove g
  */
- function parse(stringToParse){
-  stringToParse = stringToParse.toLowerCase();
-  return stringToParse.replace(/[^a-fh-zA-EH-Z]/g,"");
+function parse(stringToParse){
+  stringToParse = stringToParse.toLowerCase(); // Convert uppercase
+  stringToParse = stringToParse.replace(/[^a-z]/g,""); // Only alphanumeric
+  return stringToParse.replace(/q/g, ''); // Strip q's
 }
