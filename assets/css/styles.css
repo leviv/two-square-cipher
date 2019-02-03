@@ -70,4 +70,34 @@ html {
   margin: 0px !important;
 }
 
+h1, h2 {
+  text-align: center;
+  text-decoration: underline;
+}
+
+p.square-label {
+  text-align: center;
+}
+
+h2#encrypt-result, h2#decrypt-result {
+  text-decoration: none;
+}
+h2#encrypt-result span, h2#decrypt-result span {
+  font-weight: bold;
+}
+
+#solver-container {
+  margin-top: 50px;
+}
+
+button {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.grid .col-sm-2 {
+  border: 1px solid #999;
+}
+
 /*# sourceMappingURL=styles.css.map */
