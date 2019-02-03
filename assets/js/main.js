@@ -1,14 +1,24 @@
 var topSquareDecrypt = new Array(5);
 var bottomSquareDecrypt = new Array(5);
+var topSquareEncrypt = new Array(5);
+var bottomSquareEncrypt = new Array(5);
 
-// Decrypt code
+// Add handlers for encrypt and decrypt buttons
 $(document).ready(function(){
   // find elements
   var button = $("button")
 
-  // handle click and add class
+  // handle click for decrypt button
   $(".decrypt-form button").on("click", function(){
     decryptPrep();
+
+
+  });
+
+  // handle click for encrypt button
+  $(".encrypt-form button").on("click", function(){
+    console.log("hello");
+    encryptPrep();
   });
 
 });
@@ -36,6 +46,48 @@ function decryptPrep(){
 
   decrypt(key1, key2, text);
 }
+
+/*
+ * Function to fetch and parse data for encryption
+ *
+ */
+function encryptPrep(){
+  // Initialize the 2d array
+  for(var i = 0; i < 5; i++){
+    topSquareEncrypt[i] = new Array(5);
+    bottomSquareEncrypt[i] = new Array(5);
+  }
+
+  // Grab the user entered values
+  var key1 = parse($("input#encrypt-keyword1").val());
+  var key2 = parse($("input#encrypt-keyword2").val());
+  var text = parse($("input#encrypt-text").val());
+
+  // If the text entered is an odd number
+  if (text.length % 2 == 1){
+    text += 'z';
+  }
+
+  encrypt(key1, key2, text);
+}
+
+/*
+ * Function to encrypt the data
+ *
+ */
+function encrypt(key1, key2, text){
+  var topSquare = $("#encrypt-container .top-grid")
+  var bottomSquare = $("#encrypt-container .bottom-grid")
+
+  key1 = buildKey(key1, topSquare, topSquareEncrypt);
+  key2 = buildKey(key2, bottomSquare, bottomSquareEncrypt);
+
+  var encryptedText = solveSquares(topSquareEncrypt, bottomSquareEncrypt, text);
+
+  $('#encrypt-result span').html(encryptedText);
+  return encryptedText;
+}
+
 
 /*
  * Function to decrypt the data
