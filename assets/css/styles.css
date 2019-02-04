@@ -100,17 +100,21 @@ h2#encrypt-result span, h2#decrypt-result span {
 button {
   width: 100%;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 35px;
 }
 
 .grid {
-  padding: 0 20px;
+  padding: 0 0px;
   margin-bottom: 20px;
+  text-align: center !important;
 }
-.grid .col-sm-2 {
-  border: 1px solid #999;
+.grid .row {
+  text-align: center;
 }
-.grid .col-sm-2, .grid .col-sm-1 {
+.grid .col-xs-2 {
+  border: 1px solid #999 !important;
+}
+.grid .col-xs-2, .grid .col-xs-1 {
   text-align: center;
 }
 
