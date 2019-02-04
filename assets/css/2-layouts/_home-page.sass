@@ -1,12 +1,15 @@
 /* ===============================
 		Home Page
 		=============================== */
-figure
-	height: 100vh
 
-html
-	padding: 0px !important
-	margin: 0px !important
+body, html
+	overflow-x: hidden
+
+body
+	margin: 35px 0
+
+.row
+	margin: auto
 
 h1, h2
 	text-align: center
@@ -14,6 +17,9 @@ h1, h2
 
 p.square-label
 	text-align: center
+
+#decrypt-container, #encrypt-container
+	padding: 0 25px
 
 h2#encrypt-result, h2#decrypt-result
 	text-decoration: none
@@ -29,5 +35,9 @@ button
 	margin-bottom: 15px
 
 .grid
+	padding: 0 20px
+	margin-bottom: 20px
 	.col-sm-2
 		border: 1px solid #999
+	.col-sm-2, .col-sm-1
+		text-align: center

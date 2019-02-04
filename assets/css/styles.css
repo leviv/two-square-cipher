@@ -61,13 +61,16 @@ h1, h1 span {
 /* ===============================
  * Home Page
  * =============================== */
-figure {
-  height: 100vh;
+body, html {
+  overflow-x: hidden;
 }
 
-html {
-  padding: 0px !important;
-  margin: 0px !important;
+body {
+  margin: 35px 0;
+}
+
+.row {
+  margin: auto;
 }
 
 h1, h2 {
@@ -77,6 +80,10 @@ h1, h2 {
 
 p.square-label {
   text-align: center;
+}
+
+#decrypt-container, #encrypt-container {
+  padding: 0 25px;
 }
 
 h2#encrypt-result, h2#decrypt-result {
@@ -96,8 +103,15 @@ button {
   margin-bottom: 15px;
 }
 
+.grid {
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
 .grid .col-sm-2 {
   border: 1px solid #999;
+}
+.grid .col-sm-2, .grid .col-sm-1 {
+  text-align: center;
 }
 
 /*# sourceMappingURL=styles.css.map */
