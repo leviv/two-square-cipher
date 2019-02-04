@@ -91,6 +91,7 @@ h2#encrypt-result, h2#decrypt-result {
 }
 h2#encrypt-result span, h2#decrypt-result span {
   font-weight: bold;
+  overflow-wrap: break-word;
 }
 
 #solver-container {
